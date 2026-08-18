@@ -21,7 +21,7 @@ Door Clicker 是一个基于 ESP8266 的智能门禁控制系统，通过 MQTT �
 
 ## 二、系统架构
 
-![系统架构图](https://cdn.jsdelivr.net/gh/DoLovya/blog@main/door-clicker/blog/architecture-diagram.jpg)
+![系统架构图](https://cdn.jsdelivr.net/gh/DoLovya/blog@main/door-clicker/blog/images/architecture-diagram.jpg)
 
 ### 数据流说明
 
@@ -53,7 +53,7 @@ MQTT 协议实现了"内网穿透"的效果：
 
 舵机固定在门锁上后，只需将三根线（VCC、GND、SIGNAL）插入 ESP8266 的排针即可。
 
-![硬件安装实物图](https://cdn.jsdelivr.net/gh/DoLovya/blog@main/door-clicker/blog/hardware-installation.jpg)
+![硬件安装实物图](https://cdn.jsdelivr.net/gh/DoLovya/blog@main/door-clicker/blog/images/hardware-installation.jpg)
 
 ### 接线说明
 
@@ -137,11 +137,11 @@ python run.py
 
 **桌面版：**
 
-![Web 界面效果图](https://cdn.jsdelivr.net/gh/DoLovya/blog@main/door-clicker/blog/web-ui-screenshot.jpg)
+![Web 界面效果图](https://cdn.jsdelivr.net/gh/DoLovya/blog@main/door-clicker/blog/images/web-ui-screenshot.jpg)
 
 **手机版：**
 
-![手机版界面](https://cdn.jsdelivr.net/gh/DoLovya/blog@main/door-clicker/blog/web-ui-mobile.jpg)
+![手机版界面](https://cdn.jsdelivr.net/gh/DoLovya/blog@main/door-clicker/blog/images/web-ui-mobile.jpg)
 
 ---
 
@@ -437,32 +437,3 @@ Door Clicker 项目展示了如何使用 ESP8266 + MQTT 构建一个完整的物
 ### 项目链接
 
 - GitHub: https://github.com/DoLovya/door-clicker
-
----
-
-## 附录：多平台发布指南
-
-> 本文档遵循 Markdown 格式规范，可直接发布到各技术博客平台。
-
-### 发布步骤
-
-1. **GitHub 图床方案**（推荐）
-   - 将 `blog/` 目录下的图片上传到 GitHub 仓库
-   - 使用 jsDelivr CDN 链接：`https://cdn.jsdelivr.net/gh/{user}/{repo}/{path}`
-   - 替换文档中的图片路径
-
-2. **各平台导入**
-   - CSDN：支持 Markdown 导入，直接粘贴即可
-   - 知乎：编辑器支持 Markdown，需手动上传图片
-   - 稀土掘金：支持 Markdown，图片需手动上传
-   - 博客园：支持 Markdown，图片需手动上传
-
-3. **图片处理建议**
-   - 使用图床托管图片，避免各平台图片加载问题
-   - 推荐图床：GitHub + jsDelivr、七牛云、阿里云 OSS
-
-### 注意事项
-
-- 各平台 Markdown 支持程度不同，可能需要微调格式
-- 代码块在知乎等平台可能需要重新格式化
-- Mermaid 图表在大多数平台不支持，建议转换为图片

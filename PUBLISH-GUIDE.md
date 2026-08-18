@@ -12,32 +12,35 @@
 
 ## 方案一：GitHub + jsDelivr 图床（推荐）
 
-### 1. 创建图片仓库
+### 1. 图片放在仓库内
 
 ```bash
-# 创建 GitHub 仓库 blog-images
-# 将图片上传到仓库
+# 图片直接放到 {项目}/blog/ 目录下
+# door-clicker/blog/architecture-diagram.jpg
+# door-clicker/blog/web-ui-screenshot.jpg
 ```
 
 ### 2. 获取 CDN 链接
 
 ```
-https://cdn.jsdelivr.net/gh/{username}/blog-images/{filename}
+https://cdn.jsdelivr.net/gh/DoLovya/blog@main/{path}
 ```
 
 **示例**：
 ```
-https://cdn.jsdelivr.net/gh/DoLovya/blog-images/circuit-diagram.jpg
+https://cdn.jsdelivr.net/gh/DoLovya/blog@main/door-clicker/blog/architecture-diagram.jpg
 ```
+
+> **刷新缓存**：push 后图片未立即更新时，访问 `https://purge.jsdelivr.net/gh/DoLovya/blog@main/{path}` 手动刷新。
 
 ### 3. 替换文档图片路径
 
 ```markdown
-# 将本地路径
-![接线图](./circuit-diagram.jpg)
+# 将本地路径（不推荐用于发布平台）
+![架构图](./architecture-diagram.jpg)
 
-# 替换为 CDN 路径
-![接线图](https://cdn.jsdelivr.net/gh/DoLovya/blog-images/circuit-diagram.jpg)
+# 替换为 CDN 路径（所有博客平台通用）
+![架构图](https://cdn.jsdelivr.net/gh/DoLovya/blog@main/door-clicker/blog/architecture-diagram.jpg)
 ```
 
 ### 4. 发布到各平台
