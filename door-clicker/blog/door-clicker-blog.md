@@ -1,6 +1,8 @@
 # 基于 ESP8266 + MQTT 的智能门禁系统
 
 > 一个完整的物联网门禁项目，实现远程开门、状态监控、设备管理等功能
+>
+> 📦 **项目源码**：[github.com/DoLovya/door-clicker](https://github.com/DoLovya/door-clicker)
 
 ## 一、项目简介
 
@@ -21,7 +23,7 @@ Door Clicker 是一个基于 ESP8266 的智能门禁控制系统，通过 MQTT �
 
 ## 二、系统架构
 
-![系统架构图](https://cdn.jsdelivr.net/gh/DoLovya/blog@main/door-clicker/blog/images/architecture-diagram.jpg)
+<img src="https://cdn.jsdelivr.net/gh/DoLovya/blog@main/door-clicker/blog/images/architecture-diagram.jpg" alt="系统架构图" width="80%">
 
 ### 数据流说明
 
@@ -53,7 +55,7 @@ MQTT 协议实现了"内网穿透"的效果：
 
 舵机固定在门锁上后，只需将三根线（VCC、GND、SIGNAL）插入 ESP8266 的排针即可。
 
-![硬件安装实物图](https://cdn.jsdelivr.net/gh/DoLovya/blog@main/door-clicker/blog/images/hardware-installation.jpg)
+<img src="https://cdn.jsdelivr.net/gh/DoLovya/blog@main/door-clicker/blog/images/hardware-installation.jpg" alt="硬件安装实物图" width="80%">
 
 ### 接线说明
 
@@ -135,13 +137,7 @@ python run.py
 
 ### Web 界面效果
 
-**桌面版：**
-
-![Web 界面效果图](https://cdn.jsdelivr.net/gh/DoLovya/blog@main/door-clicker/blog/images/web-ui-screenshot.jpg)
-
-**手机版：**
-
-![手机版界面](https://cdn.jsdelivr.net/gh/DoLovya/blog@main/door-clicker/blog/images/web-ui-mobile.jpg)
+<img src="https://cdn.jsdelivr.net/gh/DoLovya/blog@main/door-clicker/blog/images/web-ui-mobile.jpg" alt="手机版开门界面" width="45%">
 
 ---
 
@@ -149,7 +145,7 @@ python run.py
 
 Web 管理后台配置页总览（MQTT 连接、舵机参数、密码管理、通信日志集中管理）：
 
-![配置页总览](https://cdn.jsdelivr.net/gh/DoLovya/blog@main/door-clicker/blog/images/web-config.jpg)
+<img src="https://cdn.jsdelivr.net/gh/DoLovya/blog@main/door-clicker/blog/images/web-config.jpg" alt="配置页总览" width="85%">
 
 ### 5.1 固件配网（ESP8266 端）
 
@@ -174,7 +170,7 @@ http://192.168.4.1/
 
 自动重定向到 `http://192.168.4.1/config` 配置页。页面包含 WiFi 配置、MQTT 配置、舵机参数和舵机测试四大分区：
 
-![ESP8266 配置页](https://cdn.jsdelivr.net/gh/DoLovya/blog@main/door-clicker/blog/images/firmware-config.jpg)
+<img src="https://cdn.jsdelivr.net/gh/DoLovya/blog@main/door-clicker/blog/images/firmware-config.jpg" alt="ESP8266 配置页" width="80%">
 
 | 分区 | 字段 | 说明 |
 |------|------|------|
@@ -487,7 +483,3 @@ WantedBy=multi-user.target
 ## 十一、总结
 
 Door Clicker 项目展示了如何使用 ESP8266 + MQTT 构建一个完整的物联网门禁系统。通过 MQTT 协议实现了"内网穿透"，使得公网可以控制内网设备。项目包含了固件开发、Web 服务、自动化部署等完整的技术栈，适合作为物联网入门学习项目。
-
-### 项目链接
-
-- GitHub: https://github.com/DoLovya/door-clicker
