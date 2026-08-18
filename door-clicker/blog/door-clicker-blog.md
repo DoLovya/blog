@@ -147,6 +147,10 @@ python run.py
 
 ## 五、功能详解
 
+配置页总览（MQTT 连接、舵机参数、密码管理、通信日志集中管理）：
+
+![配置页总览](https://cdn.jsdelivr.net/gh/DoLovya/blog@main/door-clicker/blog/images/web-config.jpg)
+
 ### 5.1 设备配网
 
 1. 烧录固件后，ESP8266 启动 WiFi 热点
