@@ -147,17 +147,67 @@ python run.py
 
 ## 五、功能详解
 
-配置页总览（MQTT 连接、舵机参数、密码管理、通信日志集中管理）：
+Web 管理后台配置页总览（MQTT 连接、舵机参数、密码管理、通信日志集中管理）：
 
 ![配置页总览](https://cdn.jsdelivr.net/gh/DoLovya/blog@main/door-clicker/blog/images/web-config.jpg)
 
-### 5.1 设备配网
+### 5.1 固件配网（ESP8266 端）
 
-1. 烧录固件后，ESP8266 启动 WiFi 热点
-2. 连接热点（默认 SSID：`DoorClicker-<芯片ID>`）
-3. 浏览器访问 `http://192.168.4.1`
-4. 输入 WiFi 信息和 MQTT Broker 地址
-5. 保存后设备重启并连接网络
+固件烧录后第一次启动，ESP8266 会进入 **AP + STA 双模式**：一边开放 WiFi 热点供你设置参数，一边尝试连接上次配置的路由器（首次为空则跳过）。
+
+#### 步骤 1：连接设备热点
+
+| 参数 | 值 |
+|------|-----|
+| WiFi 名称（SSID） | `DoorClicker` |
+| WiFi 密码 | `door1234` |
+
+> 💡 SSID 与密码在 `door-clicker-firmware/src/main.cpp` 中定义，可自行修改。
+
+#### 步骤 2：访问 ESP8266 配置页
+
+手机/电脑连上 `DoorClicker` 热点后，浏览器访问：
+
+```
+http://192.168.4.1/
+```
+
+自动重定向到 `http://192.168.4.1/config` 配置页。页面包含 WiFi 配置、MQTT 配置、舵机参数和舵机测试四大分区：
+
+![ESP8266 配置页](https://cdn.jsdelivr.net/gh/DoLovya/blog@main/door-clicker/blog/images/firmware-config.jpg)
+
+| 分区 | 字段 | 说明 |
+|------|------|------|
+| **WiFi 配置** | SSID / 密码 | 家中路由器的 WiFi 凭据 |
+| **MQTT 配置** | Server / Port / 用户 / 密码 / Topic | MQTT Broker 地址、端口和开门主题（默认：`door/<芯片ID_HEX8>`） |
+| **舵机参数** | GPIO 引脚 | 默认 `2`（即 D4） |
+| **舵机测试** | GPIO 引脚 / 测试按钮 | 填入引脚后点「▶ 测试舵机」验证 0°→90°→0° 旋转是否正常 |
+
+> ✅ 填写后点「保存配置」，ESP8266 会重启并尝试连接路由器。截图中的测试按钮（▶ 测试舵机）**不会**写入配置，可放心点击验证接线。
+
+#### 步骤 3：恢复正常联网
+
+保存配置并重启后，ESP8266 会连接到你设置的路由器 WiFi，此时：
+- `DoorClicker` 热点仍保留（AP 模式常驻），但 STA 模式已连接公网
+- 你可以把手机/电脑重新连回家用路由器，即可正常上网
+- ESP8266 通过 MQTT 定期上报心跳到 Broker，Web 服务端通过心跳判定设备在线/离线
+
+#### 步骤 4：部署 Web 服务并测试开门
+
+```bash
+# 1. 部署 door-clicker-web（参考 4.3 节与第八章）
+cd door-clicker-web
+pip install -r requirements.txt
+python run.py
+
+# 2. 在 Web 配置页（/config）填入相同的 MQTT Broker 与开门 Topic
+#    若连接成功，页面会显示「MQTT 已连接 · 设备在线」
+
+# 3. 回到开门页（/），点击中间的「开门」按钮
+#    舵机应按配置的角度执行开门 → 延时 → 关门动作
+```
+
+至此完成「烧录 → 配网 → 联网 → 开门」全链路，后续管理全部通过 Web 端进行。
 
 ### 5.2 开门协议
 
