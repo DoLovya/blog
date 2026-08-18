@@ -21,7 +21,7 @@ Door Clicker 是一个基于 ESP8266 的智能门禁控制系统，通过 MQTT �
 
 ## 二、系统架构
 
-![系统架构图](./architecture-diagram.jpg)
+![系统架构图](https://cdn.jsdelivr.net/gh/DoLovya/blog@main/door-clicker/blog/architecture-diagram.jpg)
 
 ### 数据流说明
 
@@ -49,19 +49,23 @@ MQTT 协议实现了"内网穿透"的效果：
 | 舵机 | SG90/MG996R | 门锁驱动 |
 | MQTT Broker | EMQX/Mosquitto | 消息中转 |
 
-### 接线图
+### 硬件安装
 
-![接线图](./circuit-diagram.jpg)
+舵机固定在门锁上后，只需将三根线（VCC、GND、SIGNAL）插入 ESP8266 的排针即可。
 
-### 引脚分配
+![硬件安装实物图](https://cdn.jsdelivr.net/gh/DoLovya/blog@main/door-clicker/blog/hardware-installation.jpg)
 
-| ESP8266 引脚 | GPIO | 连接 |
-|-------------|------|------|
-| D1 | GPIO5 | 舵机信号线 |
-| - | 3.3V | 舵机 VCC（建议外部5V供电） |
-| G | GND | 舵机 GND |
+### 接线说明
 
-> ⚠️ **注意**：舵机启动电流较大（可达 500mA+），建议使用外部 5V 供电以避免 ESP8266 重启。
+| ESP8266 引脚 | 连接 |
+|-------------|------|
+| 3V3 | 舵机 VCC（建议外部 5V 供电） |
+| G | 舵机 GND |
+| D1 (GPIO5) | 舵机 SIGNAL |
+
+> 💡 SG90 舵机的三根线（红/棕/橙）对应 VCC/GND/SIGNAL，可直接插入 ESP8266 的排针，无需额外焊接。
+>
+> ⚠️ 舵机启动电流较大（可达 500mA+），建议使用外部 5V 供电以避免 ESP8266 重启。
 
 ---
 
@@ -133,11 +137,11 @@ python run.py
 
 **桌面版：**
 
-![Web 界面效果图](./web-ui-screenshot.jpg)
+![Web 界面效果图](https://cdn.jsdelivr.net/gh/DoLovya/blog@main/door-clicker/blog/web-ui-screenshot.jpg)
 
 **手机版：**
 
-![手机版界面](./web-ui-mobile.jpg)
+![手机版界面](https://cdn.jsdelivr.net/gh/DoLovya/blog@main/door-clicker/blog/web-ui-mobile.jpg)
 
 ---
 

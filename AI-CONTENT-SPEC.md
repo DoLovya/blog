@@ -82,7 +82,7 @@
 - 标题层级：`#` 仅用于文章标题，`##` 用于章节，`###` 用于子节
 - 表格：字段、类型、说明三列对齐
 - 代码块：标注语言标签（`bash`、`python`、`json`、`nginx` 等）
-- 图片引用：相对路径 `./xxx.jpg`，不使用绝对路径
+- 图片引用：使用 jsDelivr CDN 链接 `https://cdn.jsdelivr.net/gh/DoLovya/blog@main/{path}`
 - 提示框：`> ⚠️` 警告、`> 💡` 提示
 
 ### 3.3 图片规范

@@ -64,7 +64,7 @@ git submodule add <repo-url> <project>/code
 ## 发布流程
 
 1. 图片上传到对应项目的 `blog/` 目录
-2. 使用 GitHub 图床：`https://raw.githubusercontent.com/<user>/<repo>/main/{path}`
+2. 使用 jsDelivr CDN：`https://cdn.jsdelivr.net/gh/DoLovya/blog@main/{path}`
 3. 替换文档中的图片路径
 4. 使用 Markdown Nice 编辑美化
 5. 发布到各平台（CSDN、知乎、掘金）
