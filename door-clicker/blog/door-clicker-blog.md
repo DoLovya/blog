@@ -68,9 +68,11 @@ MQTT 协议实现了"内网穿透"的效果：
 
 ### 硬件安装
 
-舵机固定在门锁上后，只需将三根线（VCC、GND、SIGNAL）插入 ESP8266 的排针即可。
+舵机固定在**室内对讲分机的单元门开锁按键旁**后，只需将三根线（VCC、GND、SIGNAL）插入 ESP8266 的排针即可。
 
-<img src="https://cdn.jsdelivr.net/gh/DoLovya/blog@main/door-clicker/blog/images/hardware-installation.jpg" alt="硬件安装实物图" width="80%">
+#### 安装细节图（舵机拨片按压按键位置 + 舵机线直插 ESP8266）
+
+<img src="https://cdn.jsdelivr.net/gh/DoLovya/blog@main/door-clicker/blog/images/hardware-detail.jpg" alt="舵机拨片对准室内分机单元门开锁键 + 舵机三根线直插 ESP8266 的细节图" width="80%">
 
 ### 接线说明
 
