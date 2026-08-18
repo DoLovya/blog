@@ -1,0 +1,3 @@
+[submodule "door-clicker/code"]
+	path = door-clicker/code
+	url = https://github.com/DoLovya/door-clicker.git
