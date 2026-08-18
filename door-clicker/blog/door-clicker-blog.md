@@ -336,60 +336,16 @@ password_hash = hashlib.sha256(password.encode("utf-8")).hexdigest()
 
 ---
 
-## 七、项目结构
+## 七、部署上线
 
-```
-door-clicker/
-├── door-clicker-firmware/       # ESP8266 固件
-│   ├── include/                 # 头文件
-│   │   ├── config_store.h       # 配置存储（WiFi/MQTT）
-│   │   ├── door_clicker_app.h   # 主应用类
-│   │   ├── door_command.h       # 舵机命令结构
-│   │   ├── servo_controller.h   # 舵机控制
-│   │   ├── http_config_service.h # HTTP 配网服务
-│   │   └── logger.h             # 串口日志
-│   ├── src/                     # 源文件
-│   ├── docs/                    # 文档
-│   │   └── mqtt-protocol.md     # MQTT 协议说明
-│   ├── data/                    # 默认配置
-│   ├── test/                    # 测试
-│   └── platformio.ini           # PlatformIO 配置
-│
-└── door-clicker-web/            # Web 管理服务
-    ├── src/                     # 源码目录
-    │   ├── templates/           # HTML 模板
-    │   │   ├── door.html        # 开门页
-    │   │   ├── index.html       # 配置页
-    │   │   └── login.html       # 登录页
-    │   ├── static/              # 静态资源
-    │   │   ├── css/             # 样式表
-    │   │   └── favicon.svg      # 图标
-    │   ├── app.py               # Flask 主应用 + 路由
-    │   ├── auth.py              # 认证（登录/登出/会话）
-    │   ├── config_manager.py    # 配置管理（读写/校验）
-    │   ├── mqtt_client_manager.py # MQTT 客户端（单例）
-    │   ├── mqtt_command_publisher.py # 命令发布
-    │   ├── mqtt_command_subscriber.py # 命令订阅
-    │   └── log_manager.py       # 日志管理
-    ├── tests/                   # 单元测试
-    ├── data/                    # 运行时数据（配置/日志）
-    ├── run.py                   # 启动入口
-    ├── config.json              # 运行时配置
-    └── requirements.txt         # Python 依赖
-```
-
----
-
-## 八、部署上线
-
-### 8.1 服务器要求
+### 7.1 服务器要求
 
 - Linux 服务器（推荐 CentOS/Ubuntu）
 - Python 3.9+
 - Nginx
 - MQTT Broker（EMQX 推荐）
 
-### 8.2 自动化部署
+### 7.2 自动化部署
 
 项目使用 GitHub Actions 实现 CI/CD，包含三个工作流：
 
@@ -406,7 +362,7 @@ door-clicker/
 4. 拉取最新代码并安装依赖
 5. 重启 systemd 服务
 
-### 8.3 Nginx 配置
+### 7.3 Nginx 配置
 
 ```nginx
 server {
@@ -422,7 +378,7 @@ server {
 }
 ```
 
-### 8.4 systemd 服务
+### 7.4 systemd 服务
 
 ```ini
 [Unit]
@@ -443,7 +399,7 @@ WantedBy=multi-user.target
 
 ---
 
-## 九、技术栈
+## 八、技术栈
 
 ### 固件
 
@@ -467,7 +423,7 @@ WantedBy=multi-user.target
 
 ---
 
-## 十、常见问题
+## 九、常见问题
 
 ### Q1: 舵机不动作？
 - 确认 GPIO2 (D4) 接线正确
@@ -497,6 +453,6 @@ WantedBy=multi-user.target
 
 ---
 
-## 十一、总结
+## 十、总结
 
 Door Clicker 项目展示了如何使用 ESP8266 + MQTT 构建一个完整的物联网门禁系统。通过 MQTT 协议实现了"内网穿透"，使得公网可以控制内网设备。项目包含了固件开发、Web 服务、自动化部署等完整的技术栈，适合作为物联网入门学习项目。
