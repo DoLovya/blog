@@ -17,7 +17,7 @@
 
 现在，**回来不用等邻居、门铃响了不用跑到门口**，坐在沙发上点一下手机就行。
 
-<img src="https://cdn.jsdelivr.net/gh/DoLovya/blog@main/door-clicker/blog/images/hardware-installation.jpg" alt="舵机固定在室内对讲分机单元门开锁按键旁的实物图" width="75%">
+<img src="https://cdn.jsdelivr.net/gh/DoLovya/blog@main/door-clicker/blog/images/hardware-installation.jpg" alt="舵机固定在室内对讲分机单元门开锁按键旁的实物图" width="65%">
 
 ## 一、项目简介
 
@@ -38,7 +38,7 @@ Door Clicker 是一个基于 ESP8266 的智能门禁控制系统，通过 MQTT �
 
 ## 二、系统架构
 
-<img src="https://cdn.jsdelivr.net/gh/DoLovya/blog@main/door-clicker/blog/images/architecture-diagram.jpg" alt="系统架构图" width="80%">
+<img src="https://cdn.jsdelivr.net/gh/DoLovya/blog@main/door-clicker/blog/images/architecture-diagram.jpg" alt="系统架构图" width="70%">
 
 ### 数据流说明
 
@@ -72,7 +72,7 @@ MQTT 协议实现了"内网穿透"的效果：
 
 #### 安装细节图（舵机拨片按压按键位置 + 舵机线直插 ESP8266）
 
-<img src="https://cdn.jsdelivr.net/gh/DoLovya/blog@main/door-clicker/blog/images/hardware-detail.jpg" alt="舵机拨片对准室内分机单元门开锁键 + 舵机三根线直插 ESP8266 的细节图" width="80%">
+<img src="https://cdn.jsdelivr.net/gh/DoLovya/blog@main/door-clicker/blog/images/hardware-detail.jpg" alt="舵机拨片对准室内分机单元门开锁键 + 舵机三根线直插 ESP8266 的细节图" width="70%">
 
 ### 接线说明
 
@@ -92,24 +92,33 @@ MQTT 协议实现了"内网穿透"的效果：
 
 ### 4.1 搭建 MQTT Broker
 
-推荐使用 [EMQX](https://emqx.com/) 或 [Mosquitto](https://mosquitto.org/)：
+推荐使用 [Mosquitto](https://mosquitto.org/)（轻量、开源）：
 
 ```bash
-# Docker 快速部署 EMQX
-docker run -d --name emqx \
+# Docker 快速部署 Mosquitto（允许匿名连接，适合本地快速验证）
+docker run -d --name mosquitto \
   -p 1883:1883 \
-  -p 8083:8083 \
-  -p 8883:8883 \
-  emqx/emqx:latest
+  -p 9001:9001 \
+  eclipse-mosquitto:latest \
+  mosquitto -c /mosquitto-no-auth.conf
 ```
+
+> 💡 `mosquitto-no-auth.conf` 是镜像内置的"无需认证"配置，适用于快速体验。生产环境建议自行挂载配置文件开启账号密码 + TLS。
 
 ### 4.2 烧录固件
 
+先在 VSCode 中安装 **PlatformIO IDE 插件**：
+
+1. 打开 VSCode，左侧扩展商店搜索 `PlatformIO IDE` 并安装
+2. 安装完成后左侧会出现 PlatformIO 图标，等待初始化完成（首次安装会自动下载 PlatformIO Core）
+3. 在 VSCode 中打开项目里的 `door-clicker-firmware` 文件夹，然后点击**左下角的 PlatformIO 专用终端图标**（🖥️ 形状），打开 PlatformIO CLI 专用终端：
+
+<img src="https://cdn.jsdelivr.net/gh/DoLovya/blog@main/door-clicker/blog/images/vscode-platformio-terminal.jpg" alt="VSCode 左下角 PlatformIO 专用终端按钮位置示意图" width="75%">
+
+4. 在打开的 PlatformIO 终端中执行以下命令（ESP8266 开发板通过 USB 连接电脑）：
+
 ```bash
 cd door-clicker-firmware
-
-# 安装 PlatformIO (首次使用)
-# 参考 https://platformio.org/install
 
 # 编译
 pio run
@@ -120,6 +129,8 @@ pio run --target upload
 # 查看串口日志
 pio device monitor
 ```
+
+> 💡 也可以直接点击 VSCode 底部状态栏的 PlatformIO 快捷按钮：`✓` 编译、`→` 上传、`插头图标` 串口监视。
 
 ### 4.3 启动 Web 服务
 
@@ -162,7 +173,7 @@ python run.py
 
 Web 管理后台配置页总览（MQTT 连接、舵机参数、密码管理、通信日志集中管理）：
 
-<img src="https://cdn.jsdelivr.net/gh/DoLovya/blog@main/door-clicker/blog/images/web-config.jpg" alt="配置页总览" width="85%">
+<img src="https://cdn.jsdelivr.net/gh/DoLovya/blog@main/door-clicker/blog/images/web-config.jpg" alt="配置页总览" width="75%">
 
 ### 5.1 固件配网（ESP8266 端）
 
@@ -187,7 +198,7 @@ http://192.168.4.1/
 
 自动重定向到 `http://192.168.4.1/config` 配置页。页面包含 WiFi 配置、MQTT 配置、舵机参数和舵机测试四大分区：
 
-<img src="https://cdn.jsdelivr.net/gh/DoLovya/blog@main/door-clicker/blog/images/firmware-config.jpg" alt="ESP8266 配置页" width="80%">
+<img src="https://cdn.jsdelivr.net/gh/DoLovya/blog@main/door-clicker/blog/images/firmware-config.jpg" alt="ESP8266 配置页" width="70%">
 
 | 分区 | 字段 | 说明 |
 |------|------|------|
