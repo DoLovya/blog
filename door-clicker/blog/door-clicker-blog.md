@@ -219,7 +219,7 @@ http://192.168.4.1/
 #### 步骤 4：部署 Web 服务并测试开门
 
 ```bash
-# 1. 部署 door-clicker-web（参考 4.3 节与第八章）
+# 1. 部署 door-clicker-web（参考 4.3 节与第六章）
 cd door-clicker-web
 pip install -r requirements.txt
 python run.py
@@ -323,9 +323,7 @@ password_hash = hashlib.sha256(password.encode("utf-8")).hexdigest()
 
 配置文件中只存储 hash 值，即使泄露也无法还原明文密码。
 
----
-
-## 六、API 接口
+### 5.9 API 接口
 
 | 方法 | 路径 | 认证 | 说明 |
 |------|------|------|------|
@@ -347,16 +345,16 @@ password_hash = hashlib.sha256(password.encode("utf-8")).hexdigest()
 
 ---
 
-## 七、部署上线
+## 六、部署上线
 
-### 7.1 服务器要求
+### 6.1 服务器要求
 
 - Linux 服务器（推荐 CentOS/Ubuntu）
 - Python 3.9+
 - Nginx
 - MQTT Broker（EMQX 推荐）
 
-### 7.2 自动化部署
+### 6.2 自动化部署
 
 项目使用 GitHub Actions 实现 CI/CD，包含三个工作流：
 
@@ -373,7 +371,7 @@ password_hash = hashlib.sha256(password.encode("utf-8")).hexdigest()
 4. 拉取最新代码并安装依赖
 5. 重启 systemd 服务
 
-### 7.3 Nginx 配置
+### 6.3 Nginx 配置
 
 ```nginx
 server {
@@ -389,7 +387,7 @@ server {
 }
 ```
 
-### 7.4 systemd 服务
+### 6.4 systemd 服务
 
 ```ini
 [Unit]
@@ -410,31 +408,31 @@ WantedBy=multi-user.target
 
 ---
 
-## 八、技术栈
+## 七、技术栈与选型
 
 ### 固件
 
-| 技术 | 版本 | 用途 |
-|------|------|------|
-| PlatformIO | 6.0+ | 开发环境 |
-| Arduino Framework | - | ESP8266 SDK |
-| PubSubClient | 2.8+ | MQTT 客户端 |
-| ArduinoJson | 7.3+ | JSON 解析 |
+| 技术 | 版本 | 选型理由 |
+|------|------|----------|
+| PlatformIO | 6.0+ | 比 Arduino IDE 更适合 CI/CD，VSCode 插件体验好 |
+| Arduino Framework | - | ESP8266 官方 SDK，社区资源丰富 |
+| PubSubClient | 2.8+ | 轻量 MQTT 客户端，适配 ESP8266 内存限制 |
+| ArduinoJson | 7.3+ | 内存友好的 JSON 解析，适合 ESP8266 |
 
 ### Web 服务
 
-| 技术 | 版本 | 用途 |
-|------|------|------|
-| Python | 3.9+ | 编程语言 |
-| Flask | 3.0+ | Web 框架 |
-| Flask-SocketIO | 5.3+ | WebSocket 支持 |
-| Paho-MQTT | 2.1+ | MQTT 客户端 |
-| websockets | 13.0+ | WebSocket 库 |
-| SHA-256 | - | 密码加密 |
+| 技术 | 版本 | 选型理由 |
+|------|------|----------|
+| Python | 3.9+ | 生态成熟，Flask + paho-mqtt 组合适合快速开发 |
+| Flask | 3.0+ | 轻量 Web 框架，适合小型管理后台 |
+| Flask-SocketIO | 5.3+ | 实时推送日志和设备状态变更 |
+| Paho-MQTT | 2.1+ | Python MQTT 客户端标准选择，支持自动重连 |
+| websockets | 13.0+ | WebSocket 通信支持 |
+| SHA-256 | - | 密码哈希存储，不保存明文 |
 
 ---
 
-## 九、常见问题
+## 八、常见问题
 
 ### Q1: 舵机不动作？
 - 确认 GPIO2 (D4) 接线正确
@@ -464,6 +462,10 @@ WantedBy=multi-user.target
 
 ---
 
-## 十、总结
+## 九、总结
 
 Door Clicker 项目展示了如何使用 ESP8266 + MQTT 构建一个完整的物联网门禁系统。通过 MQTT 协议实现了"内网穿透"，使得公网可以控制内网设备。项目包含了固件开发、Web 服务、自动化部署等完整的技术栈，适合作为物联网入门学习项目。
+
+**相关链接**：
+
+- GitHub 仓库：[DoLovya/door-clicker](https://github.com/DoLovya/door-clicker)
