@@ -4,3 +4,6 @@
 [submodule "xianyu-mcp-server/code"]
 	path = xianyu-mcp-server/code
 	url = https://github.com/DoLovya/xianyu-mcp-server.git
+[submodule "pyxianyu/code"]
+	path = pyxianyu/code
+	url = https://github.com/DoLovya/pyxianyu.git
