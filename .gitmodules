@@ -1,3 +1,6 @@
 [submodule "door-clicker/code"]
 	path = door-clicker/code
 	url = https://github.com/DoLovya/door-clicker.git
+[submodule "xianyu-mcp-server/code"]
+	path = xianyu-mcp-server/code
+	url = https://github.com/DoLovya/xianyu-mcp-server.git
